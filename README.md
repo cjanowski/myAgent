@@ -82,6 +82,9 @@ The `description` is what triggers auto-loading — be specific about when it *s
 
 Keep the body a checklist of what to look for and common failure patterns, not a tutorial. The model already knows how to code; the skill's job is to point it at the specific things it tends to skip.
 
+## Shoutouts
+https://github.com/Archive228/loopkit
+
 ## License
 
 MIT. Fork it, strip it down further, make it yours.
