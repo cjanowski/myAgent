@@ -1,0 +1,54 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git branch:*)",
+      "Bash(git checkout:*)",
+      "Bash(npm test:*)",
+      "Bash(npm run lint:*)",
+      "Bash(npm run build:*)",
+      "Bash(pytest:*)",
+      "Bash(ruff:*)",
+      "Bash(mypy:*)"
+    ],
+    "deny": [
+      "Bash(git push --force:*)",
+      "Bash(git push -f:*)",
+      "Bash(rm -rf:*)",
+      "Bash(curl:*)",
+      "Bash(wget:*)",
+      "Bash(sudo:*)",
+      "Bash(chmod 777:*)",
+      "Bash(:*| bash)",
+      "Bash(:*| sh)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "echo 'File written — remember to run tests/lint before committing.'"
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "agent",
+            "prompt": "Read .claude/agents/myAgent.md and apply its checklist exactly. Check `git status`/`git diff` for uncommitted changes (use Bash if you have it; otherwise use Glob/Read to inspect recently modified files). If there are no uncommitted changes, approve immediately — there is nothing to verify. Otherwise follow the checklist and output format precisely. If its JSON status is \"fail\", block with the violations listed verbatim as the reason. If \"pass\", approve.",
+            "timeout": 60
+          }
+        ]
+      }
+    ]
+  }
+}
