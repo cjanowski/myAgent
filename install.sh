@@ -1,10 +1,10 @@
 #!/usr/bin/env bash
-# yourkit installer
+# myAgent installer
 #
 # RECOMMENDED: don't pipe this to bash blindly. Instead:
 #   git clone <this-repo-url>
 #   cat install.sh          # read it — it's short
-#   cd your-project && DEST=. bash /path/to/yourkit/install.sh
+#   cd your-project && DEST=. bash /path/to/myAgent/install.sh
 #
 # If you do want the one-liner:
 #   curl -fsSL <raw-url>/install.sh | bash
@@ -13,12 +13,12 @@
 #   REF=<tag-or-sha> ... | bash  # pin to a specific release instead of main
 set -euo pipefail
 
-REPO="${YOURKIT_REPO:-your-org/yourkit}"
+REPO="${MYAGENT_REPO:-your-org/myAgent}"
 REF="${REF:-main}"            # prefer pinning to a tagged release once you cut one
 DEST="${DEST:-$PWD}"
 FORCE="${FORCE:-0}"
 
-echo "yourkit: installing into $DEST (ref: $REF)"
+echo "myAgent: installing into $DEST (ref: $REF)"
 
 TMP=$(mktemp -d)
 trap 'rm -rf "$TMP"' EXIT
@@ -68,6 +68,6 @@ if [ -f "$DEST/.claude/CLAUDE.md" ]; then
 fi
 
 echo
-echo "yourkit: install complete — $wrote files written, $skipped skipped"
+echo "myAgent: install complete — $wrote files written, $skipped skipped"
 echo "Nothing outside $DEST was touched. No network calls beyond the GitHub download above."
 echo "Review $DEST/.claude/settings.json before your first session — it's the permission allowlist."

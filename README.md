@@ -1,4 +1,4 @@
-# yourkit
+# myAgent
 
 Four role-based review skills for Claude Code (and any agent that reads `SKILL.md`), one always-on behavioral baseline, plus a minimal, fully-documented permission harness.
 
@@ -46,7 +46,7 @@ Nothing else. No `.mcp.json`, no loop-runner, no third-party servers — those a
 git clone <this-repo-url>
 cat install.sh                      # it's short, actually read it
 cd your-project
-DEST=. bash /path/to/yourkit/install.sh
+DEST=. bash /path/to/myAgent/install.sh
 ```
 
 ### If you want the one-liner anyway
