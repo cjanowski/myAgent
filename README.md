@@ -1,12 +1,12 @@
 # myAgent
 
-Four role-based review skills for Claude Code (and any agent that reads `SKILL.md`), one always-on behavioral baseline, plus a minimal, fully-documented permission harness.
+Four role-based review skills for Claude Code (and any agent that reads `SKILL.md`), one always-on behavioral baseline, plus a minimal, fully documented permission harness.
 
 Two layers, deliberately kept separate:
 
 **Always loaded — `.claude/CLAUDE.md`**: baseline behavior for every task. Think before coding, minimum necessary changes, surgical edits, verifiable goals. This is the floor everything else stands on.
 
-**Conditionally loaded — four skills**, that fire only when relevant:
+**Conditionally loaded, four skills**, that fire only when relevant:
 
 | skill | fires when |
 |---|---|
@@ -17,7 +17,7 @@ Two layers, deliberately kept separate:
 
 The skills assume `CLAUDE.md`'s behaviors are already happening and add domain-specific things to check for on top.
 
-**On-demand — `.claude/agents/myAgent.md`**: an adversarial subagent. It reads the diff, checks it against 11 known ways agents fake "done" (weakened tests, swallowed errors, placeholder code, scope creep, untested claims, etc.), and returns strict pass/fail JSON — no fixes proposed, no encouragement, no partial credit for one real violation. Runs on Haiku by default to keep it cheap enough to call often.
+**On-demand — `.claude/agents/myAgent.md`**: an adversarial subagent. It reads the diff, checks it against 11 known ways agents fake "done" (weakened tests, swallowed errors, placeholder code, scope creep, untested claims, etc.), and returns strict pass/fail JSON, no fixes proposed, no encouragement, no partial credit for one real violation. Runs on Haiku by default to keep it cheap enough to call often.
 
 **Wired to fire automatically — the `Stop` hook in `settings.json`**: every time Claude Code is about to end a turn, an `agent`-type hook spawns a fresh subagent that reads `myAgent.md` and applies its checklist to whatever's currently uncommitted. If it fails, the turn is blocked and Claude has to address the violations before it can actually stop; if it passes (or there's nothing uncommitted to check), the turn ends normally.
 
@@ -28,7 +28,7 @@ Two things to know about this before you rely on it:
 
 ## What actually happens when you install this
 
-There is no magic. Read `install.sh` — it's ~40 lines. It downloads this repo's tarball from GitHub, and copies exactly these into your project:
+Read `install.sh` It downloads this repo's tarball from GitHub, and copies these into your project:
 
 - `skills/*` → `.claude/skills/`
 - `.claude/settings.json` → `.claude/settings.json`
@@ -36,7 +36,7 @@ There is no magic. Read `install.sh` — it's ~40 lines. It downloads this repo'
 - `.claude/agents/myAgent.md` → `.claude/agents/myAgent.md`
 - `MEMORY.md` → `MEMORY.md`
 
-Nothing else. No `.mcp.json`, no loop-runner, no third-party servers — those are opt-in additions you bolt on yourself if you want them (see below), not defaults.
+Nothing else. No `.mcp.json`, no loop-runner, no third-party servers; those are opt-in additions you bolt on yourself if you want them (see below), not defaults.
 
 **No files outside the destination directory are touched. No network calls happen other than the one GitHub download.**
 
@@ -49,7 +49,7 @@ cd your-project
 DEST=. bash /path/to/myAgent/install.sh
 ```
 
-### If you want the one-liner anyway
+### If you want the one-liner
 
 ```bash
 curl -fsSL <raw-url>/install.sh | bash
@@ -87,4 +87,4 @@ https://github.com/Archive228/loopkit
 
 ## License
 
-MIT. Fork it, strip it down further, make it yours.
+MIT. Customize as needed.
